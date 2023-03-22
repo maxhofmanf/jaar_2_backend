@@ -1,7 +1,19 @@
 <?php
-if( isset( $_POST[ 'submit' ] ) && $_SERVER[ 'REQUEST_METHOD' ] == "POST" ) {
-    $username = html_check( $_POST[ 'username' ] );    
-    $email = html_check( $_POST[ 'email' ] );
+$email = $name = $required_username = $required_email = ""; 
+
+
+if (isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST") {
+    if(empty($_POST['username'])){
+        $required_username = "Name is required";
+    } else {
+        $username = html_check($_POST['username']);
+    }
+
+    if(empty($_POST['email'])){
+        $required_email = "Email is required";
+    } else {
+        $email = html_check($_POST['email']);
+    }
 }
    function html_check($data){
     $data = trim( $data );
@@ -24,13 +36,13 @@ if( isset( $_POST[ 'submit' ] ) && $_SERVER[ 'REQUEST_METHOD' ] == "POST" ) {
 </head>
 
 <body>
-    <?php if(!isset( $_POST[ 'submit' ])){?>
+    <?php if(empty( $_POST[ 'username' ]) || empty( $_POST[ 'email' ])){?>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
             <label for="username">name:</label><br>
-            <input type="text" name="username" required><br>
+            <input style="display:inline;" type="text" name="username" ><span style="color:red;">*<?php echo $required_username;?></span><br>
             <label for="email">email:</label><br>
-            <input type="text" name="email" required>
+            <input style="display:inline;" type="text" name="email" ><span style="color:red;">*<?php echo $required_email;?></span>
             <input type="submit" name="submit">
         </form>
         <?php } else { ?>
