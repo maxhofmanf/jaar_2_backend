@@ -1,7 +1,7 @@
 <?php
-if( isset( $_GET[ 'submit' ] ) && $_SERVER[ 'REQUEST_METHOD' ] == "GET" ) {
-    $username = html_check( $_GET[ 'username' ] );    
-    $email = html_check( $_GET[ 'email' ] );
+if( isset( $_POST[ 'submit' ] ) && $_SERVER[ 'REQUEST_METHOD' ] == "POST" ) {
+    $username = html_check( $_POST[ 'username' ] );    
+    $email = html_check( $_POST[ 'email' ] );
 }
    function html_check($data){
     $data = trim( $data );
@@ -24,9 +24,9 @@ if( isset( $_GET[ 'submit' ] ) && $_SERVER[ 'REQUEST_METHOD' ] == "GET" ) {
 </head>
 
 <body>
-    <?php if(!isset( $_GET[ 'submit' ])){?>
+    <?php if(!isset( $_POST[ 'submit' ])){?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="GET">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
             <label for="username">name:</label><br>
             <input type="text" name="username" required><br>
             <label for="email">email:</label><br>
