@@ -1,6 +1,4 @@
 <?php
 require ('variables.php');
-foreach($fruits as $fruit){
-    echo $fruit . "<br>";
-}
+echo "mijn naam is: ". $voornaam . " " . $achternaam; 
 ?>

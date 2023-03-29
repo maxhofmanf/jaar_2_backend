@@ -1,3 +1,4 @@
 <?php
-$fruits = ["apple", "banana", "ananas"];
+$voornaam = "max";
+$achternaam="hofman";
 ?>
