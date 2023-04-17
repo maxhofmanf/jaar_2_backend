@@ -12,42 +12,46 @@ try {
   } catch(PDOException $e) {
 	echo "Error: " . $e->getMessage();
   }
-  $stmt  = $conn->query('SELECT * FROM characters');
+  $stmt  = $conn->query('SELECT * FROM characters ');
+  // ORDER BY name ASC
+  $characters_array = $stmt->fetchall(PDO::FETCH_ASSOC);
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style/style.css">
+    <title>All Characters</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="style/style.css" rel="stylesheet"/>
 </head>
 <body>
-    <main>
-        <?php
-        $characters_array = $stmt->fetchall(PDO::FETCH_ASSOC);
 
-            // $character = $_GET['content'];
-            foreach ($characters_array as $item){
-                    $char_item = $item;
-                    echo '<div class="character_info">';
-                    echo '<h3>' . $char_item['name'] . "</h3>";
-                    echo '<p class="char_bio">'. $char_item['bio'] . '</p>';
-                    echo '<img src="images/' . $char_item['avatar'] . '" alt="img">';
-                    echo '</div>';;
-            }
-        
-            // echo '<h3>' . $char_item['name'] . "</h3>";
-            // echo '<p class="char_bio">'. $char_item['bio'] . '</p>';
-            // echo '<img src="images/' . $char_item['avatar'] . '" alt="img">';
-            // echo '<br>';
-            
+<header><?php if($_GET['character_info']== null){ ?><h1>Alle <?php echo count($characters_array) ?> uit de database</h1> <?php } else { echo $char_item['name'];}?></header>
+<main>
 
-        ?>
-    </main>
+<?php
+
+  if($_GET['character_info']== null){ 
+    
+    $x = -1;
+    foreach ($characters_array as $char_item){
+      $x++;
+
+      include('character_info.php');
+    }
+  } else {
+    $char_item = $characters_array[$_GET['character_info']];
+    include('character.php');
+  }
+  function char_info(){
+    
+  }
+?>
+</main>
+
+
+<footer>&copy; max hofman 2023</footer>
 </body>
 </html>
