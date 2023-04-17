@@ -28,7 +28,16 @@ try {
 </head>
 <body>
 
-<header><?php if($_GET['character_info']== null){ ?><h1>Alle <?php echo count($characters_array) ?> uit de database</h1> <?php } else { echo $char_item['name'];}?></header>
+<header><?php if($_GET['character_info']== null){ ?><h1>Alle <?php echo count($characters_array) ?> uit de database</h1>
+    <?php } else { 
+        if(isset($characters_array[$_GET['character_info']])){ 
+            $char_item = $characters_array[$_GET['character_info']]; 
+            echo $char_item['name']; 
+        } else { 
+            echo "Character not found"; 
+        } 
+    }?>
+</header>
 <main>
 
 <?php
