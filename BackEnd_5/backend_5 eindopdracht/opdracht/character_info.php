@@ -1,5 +1,5 @@
 
-<div id="container">
+<div class="container">
     <a class="item" href="?character_info=<?php echo $x ?> ">
         <div class="left">
           <img class="avatar" src="images/<?php echo $char_item['avatar'] ?> " alt="img">
