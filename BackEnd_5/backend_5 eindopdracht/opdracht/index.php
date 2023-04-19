@@ -28,11 +28,14 @@ try {
 </head>
 <body>
 
-<header><?php if($_GET['character_info']== null){ ?><h1>Alle <?php echo count($characters_array) ?> uit de database</h1>
+<header><?php if(!isset($_GET['character_info']) || $_GET['character_info'] == null){ ?><h1>Alle <?php echo count($characters_array) ?> uit de database</h1>
     <?php } else { 
         if(isset($characters_array[$_GET['character_info']])){ 
             $char_item = $characters_array[$_GET['character_info']]; 
             echo $char_item['name']; 
+            ?> <a class="item" href="?character_info=">
+            <div class="BackButton"><i class="fas fa-arrow-left"></i> terug</div>
+        </a><?php 
         } else { 
             echo "Character not found"; 
         } 
@@ -42,7 +45,7 @@ try {
 
 <?php
 
-  if($_GET['character_info']== null){ 
+if(!isset($_GET['character_info']) || $_GET['character_info'] == null){
     
     $x = -1;
     foreach ($characters_array as $char_item){
